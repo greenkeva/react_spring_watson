@@ -2,10 +2,17 @@ package com.keva.react_spring_watson.CustomerAddress;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.keva.react_spring_watson.CustomerAccount.CustomerAccount;
+import com.keva.react_spring_watson.User.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity(name = "address")
 @Table(name = "customer_address")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CustomerAddress {
 
     @Id
@@ -23,85 +30,14 @@ public class CustomerAddress {
 
     @OneToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
             CascadeType.REFRESH})
-    @JoinColumn(name = "customer_account_id")
-    private CustomerAccount customerAccount;
+    @JoinColumn(name = "user_account_id")
+    private User user;
 
-
-    public CustomerAddress(){}
-    public CustomerAddress(int houseNo, String street, String apt, String city, String state, int zip) {
-        this.houseNo = houseNo;
-        this.street = street;
-        this.apt = apt;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
+    public User getUser() {
+        return user;
     }
 
-//    public CustomerAddress(int houseNo, String street, String city, String state, int zip) {
-//        this.houseNo = houseNo;
-//        this.street = street;
-//        this.city = city;
-//        this.state = state;
-//        this.zip = zip;
-//    }
-
-    public int getHouseNo() {
-        return houseNo;
-    }
-
-    public void setHouseNo(int houseNo) {
-        this.houseNo = houseNo;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getApt() {
-        return apt;
-    }
-
-    public void setApt(String apt) {
-        this.apt = apt;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public int getZip() {
-        return zip;
-    }
-
-    public void setZip(int zip) {
-        this.zip = zip;
-    }
-
-    @Override
-    public String toString() {
-        return "CustomerAddress{" +
-                "houseNo=" + houseNo +
-                ", street='" + street + '\'' +
-                ", apt='" + apt +',' + '\'' +
-                ", city='" + city +',' + '\'' +
-                ", state='" + state + '\'' +
-                ", zip=" + zip +
-                '}';
+    public void setUser(User user) {
+        this.user = user;
     }
 }
